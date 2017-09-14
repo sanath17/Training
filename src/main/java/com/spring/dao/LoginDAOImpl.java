@@ -5,11 +5,13 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.model.Login;
 
 @Repository
+@EnableTransactionManagement
 public class LoginDAOImpl implements LoginDAO {
 	
 	private SessionFactory sessionFactory;
@@ -63,7 +65,7 @@ public class LoginDAOImpl implements LoginDAO {
 
 	@Override
 	public Login findById(String id) {
-		Session session = this.sessionFactory.openSession();
+//		Session session = this.sessionFactory.openSession();
 //List<Login> users = session.createQuery("") need query to retrieve one user based on id 
 //		                                      where id is passed as a argument
 //		if (users != null && users.size() == 1)

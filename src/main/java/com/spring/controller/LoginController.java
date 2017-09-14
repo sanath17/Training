@@ -64,7 +64,7 @@ public class LoginController {
 			return "registration";
 		}
 		service.create(login);
-		model.addAttribute("success", "Employee " + login.getUserName() + " registered successfully");
+		model.addAttribute("success", "User " + login.getUserName() + " registered successfully");
 		return "success";
 	}
 	

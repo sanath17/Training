@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.spring.dao.LoginDAOImpl;
 import com.spring.model.Login;
 
 @Service
+@EnableTransactionManagement
 public class LoginServiceImpl implements LoginService {
 	
 	@Autowired
