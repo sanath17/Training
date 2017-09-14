@@ -4,32 +4,71 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.model.Login;
 
+@Repository
 public class LoginDAOImpl implements LoginDAO {
+	
 	private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-	public void save(Login p) {
+//	public List<Login> list() {
+//		Session session = this.sessionFactory.openSession();
+//		@SuppressWarnings("unchecked")
+//		List<Login> employeeList = session.createQuery("from Login").list();
+//		session.close();
+//		//employeeList.contains("rajesh");
+//		return employeeList;
+//	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Login> listAllUsers() {
 		Session session = this.sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.persist(p);
-		tx.commit();
+		List<Login> users = session.createQuery("from Login").list();
+		session.close();
+		return users;
+	}
+
+	@Override
+	@Transactional
+	public Login create(Login login) {
+		Session session = this.sessionFactory.openSession();
+		session.persist(login);
+		session.close();
+		return login;
+	}
+
+	@Override
+	@Transactional
+	public Login update(Login login) {
+		Session session = this.sessionFactory.openSession();
+		session.update(login);
+		session.close();
+		return  login;
+	}
+
+	@Override
+	public void delete(Login login) {
+		Session session = this.sessionFactory.openSession();
+		session.delete(login);
 		session.close();
 	}
 
-	public List<Login> list() {
+	@Override
+	public Login findById(String id) {
 		Session session = this.sessionFactory.openSession();
-		@SuppressWarnings("unchecked")
-		List<Login> employeeList = session.createQuery("from Login").list();
-		session.close();
-		//employeeList.contains("rajesh");
-		return employeeList;
+//List<Login> users = session.createQuery("") need query to retrieve one user based on id 
+//		                                      where id is passed as a argument
+//		if (users != null && users.size() == 1)
+//			return users.get(0);
+		return null;
 	}
 
 }

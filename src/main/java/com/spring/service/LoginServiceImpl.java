@@ -2,34 +2,48 @@ package com.spring.service;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.spring.dao.LoginDAOImpl;
 import com.spring.model.Login;
 
+@Service
 public class LoginServiceImpl implements LoginService {
-	private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-	public void save(Login p) {
-		Session session = this.sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		session.persist(p);
-		tx.commit();
-		session.close();
+	
+	@Autowired
+	private LoginDAOImpl repository;
+	
+	
+	@Override
+	public List<Login> listAllUsers() {
+		// TODO Auto-generated method stub
+		return repository.listAllUsers();
 	}
 
-	public List<Login> list() {
-		Session session = this.sessionFactory.openSession();
-		@SuppressWarnings("unchecked")
-		List<Login> employeeList = session.createQuery("from Login").list();
-		session.close();
-		//employeeList.contains("rajesh");
-		return employeeList;
+	@Override
+	public Login create(Login login) {
+		return repository.create(login);
+	}
+
+	@Override
+	public Login update(String id) {
+		Login existing = repository.findById(id);
+		if(existing==null){
+			System.out.println("not found");
+			//exception
+		}
+		return existing;
+	}
+
+	@Override
+	public void delete(String id) {
+		Login existing = repository.findById(id);
+		if(existing==null){
+			System.out.println("no user found to delete");
+			//exception
+		}
+		repository.delete(existing);
 	}
 
 }

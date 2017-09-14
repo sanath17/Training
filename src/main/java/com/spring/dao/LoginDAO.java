@@ -6,7 +6,13 @@ import com.spring.model.Login;
 
 public interface LoginDAO {
 
-public void save(Login p);
+	public List<Login> listAllUsers();
 	
-	public List<Login> list();
+	public Login findById(String id);
+
+	public Login create(Login login);
+
+	public Login update(Login login);
+
+	public void delete(Login login);
 }

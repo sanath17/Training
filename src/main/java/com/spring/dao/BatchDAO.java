@@ -9,11 +9,13 @@ public interface BatchDAO {
 
 	public List<Batch> findall();
 	
+	public Batch findById(String id);
+	
 	public Batch create(Batch student);
 	
-	public void delete(String batch_id);
+	public void delete(Batch batch);
 	
-	public Batch update(String batch_id);
+	public Batch update(Batch batch);
 	
 
 }

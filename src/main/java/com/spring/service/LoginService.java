@@ -6,7 +6,13 @@ import com.spring.model.Login;
 
 public interface LoginService {
 
-public void save(Login p);
 	
-	public List<Login> list();
+	public List<Login> listAllUsers();
+	
+	public Login create(Login login);
+	
+	public Login update(String id);
+	
+	public void delete(String id);
+		
 }

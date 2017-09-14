@@ -2,36 +2,49 @@ package com.spring.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.spring.dao.BatchDAOImpl;
 import com.spring.model.Batch;
 
 
-@Repository
+@Service
 public class BatchServiceImpl implements BatchService{
+	
+	@Autowired
+	private BatchDAOImpl repository;
 
 	@Override
 	public List<Batch> findall() {
 		// TODO Auto-generated method stub
-		return null;
+		return repository.findall();
 	}
 
 	@Override
 	public Batch create(Batch student) {
 		// TODO Auto-generated method stub
-		return null;
+		return repository.create(student);
 	}
 
 	@Override
-	public void delete(String batch_id) {
-		// TODO Auto-generated method stub
-		
+	public void delete(String id) {
+		Batch existing = repository.findById(id);
+		if(existing==null){
+			System.out.println("no batch found to delete");
+			//exception
+		}
+		repository.delete(existing);
 	}
 
 	@Override
-	public Batch update(String batch_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Batch update(String id) {
+		Batch existing = repository.findById(id);
+		if(existing==null){
+			System.out.println("not found");
+			//exception
+		}
+		return existing;
 	}
 
 }

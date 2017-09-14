@@ -11,9 +11,9 @@ public interface BatchService {
 	
 	public Batch create(Batch student);
 	
-	public void delete(String batch_id);
+	public void delete(String id);
 	
-	public Batch update(String batch_id);
+	public Batch update(String id);
 	
 
 }

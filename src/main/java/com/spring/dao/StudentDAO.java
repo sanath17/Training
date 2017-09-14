@@ -8,10 +8,12 @@ public interface StudentDAO {
 	
 	public List<Student> findall();
 	
+	public Student findById(String id);
+	
 	public Student create(Student student);
 	
-	public void delete(String id);
+	public void delete(Student student);
 	
-	public Student update(String id);
+	public Student update(Student student);
 	
 }
