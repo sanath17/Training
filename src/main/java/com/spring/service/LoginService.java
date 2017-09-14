@@ -1,10 +1,10 @@
-package com.spring.dao;
+package com.spring.service;
 
 import java.util.List;
 
 import com.spring.model.Login;
 
-public interface LoginDAO {
+public interface LoginService {
 
 public void save(Login p);
 	

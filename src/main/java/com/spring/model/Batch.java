@@ -47,13 +47,6 @@ public class Batch {
 		this.student = student;
 	}
 
-	public int getBatch_id() {
-		return batch_id;
-	}
-
-	public void setBatch_id(int batch_id) {
-		this.batch_id = batch_id;
-	}
 
 	public String getProgram() {
 		return program;
@@ -102,5 +95,13 @@ public class Batch {
 	public void setUpadted_date(Date upadted_date) {
 		this.upadted_date = upadted_date;
 	}
+
+	@Override
+	public String toString() {
+		return "Batch [student=" + student + ", program=" + program + ", trainer_name=" + trainer_name
+				+ ", student_count=" + student_count + ", course=" + course + ", created_date=" + created_date
+				+ ", upadted_date=" + upadted_date + "]";
+	}
+	
 	
 }

@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.spring.model.Employee;
+import com.spring.model.Login;
 
 public class LoginDAOImpl implements LoginDAO {
 	private SessionFactory sessionFactory;
@@ -15,7 +15,7 @@ public class LoginDAOImpl implements LoginDAO {
         this.sessionFactory = sessionFactory;
     }
 
-	public void save(Employee p) {
+	public void save(Login p) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		session.persist(p);
@@ -23,10 +23,10 @@ public class LoginDAOImpl implements LoginDAO {
 		session.close();
 	}
 
-	public List<Employee> list() {
+	public List<Login> list() {
 		Session session = this.sessionFactory.openSession();
 		@SuppressWarnings("unchecked")
-		List<Employee> employeeList = session.createQuery("from Employee").list();
+		List<Login> employeeList = session.createQuery("from Login").list();
 		session.close();
 		//employeeList.contains("rajesh");
 		return employeeList;

@@ -107,7 +107,15 @@ public class Student {
 
 	public void setUpdated_date(Date updated_date) {
 		this.updated_date = updated_date;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", batch_id=" + batch_id + ", email=" + email + ", contact=" + contact
+				+ ", visa_status=" + visa_status + ", cost=" + cost + ", created_date=" + created_date
+				+ ", updated_date=" + updated_date + "]";
 	} 
+	
 	
 	
 }

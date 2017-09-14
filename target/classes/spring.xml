@@ -38,7 +38,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>com.spring.model.Employee</value>
+				<value>com.spring.model.Login</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

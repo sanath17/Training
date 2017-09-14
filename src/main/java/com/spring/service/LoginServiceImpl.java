@@ -1,4 +1,4 @@
-package com.spring.dao;
+package com.spring.service;
 
 import java.util.List;
 
@@ -6,32 +6,30 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.spring.model.Person;
+import com.spring.model.Login;
 
-public class PersonDAOImpl implements PersonDAO {
-
+public class LoginServiceImpl implements LoginService {
 	private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-    
-    public void save(Person p) {
+
+	public void save(Login p) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		session.persist(p);
 		tx.commit();
 		session.close();
-		
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Person> list() {
+	public List<Login> list() {
 		Session session = this.sessionFactory.openSession();
-		List<Person> personList = session.createQuery("from Person").list();
+		@SuppressWarnings("unchecked")
+		List<Login> employeeList = session.createQuery("from Login").list();
 		session.close();
-		personList.contains("rajesh");
-		return personList;
+		//employeeList.contains("rajesh");
+		return employeeList;
 	}
 
 }
