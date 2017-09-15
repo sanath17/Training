@@ -2,7 +2,6 @@ package com.spring.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,19 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.spring.dao.LoginDAO;
-import com.spring.dao.LoginDAOImpl;
 import com.spring.model.Login;
-import com.spring.service.LoginServiceImpl;
+import com.spring.service.LoginService;
 
 @Controller
 public class LoginController {
-
-	@Autowired
-	private LoginServiceImpl service;
+//
+//	@Autowired
+//	private LoginServiceImpl service;
 	
-	@Autowired
-	private LoginDAOImpl repository;
+//	@Autowired
+//	private LoginDAOImpl repository;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String init(Model model) {
@@ -36,11 +33,9 @@ public class LoginController {
 	@SuppressWarnings("resource")
 	@RequestMapping(value = "/submitForm", method = RequestMethod.POST)
 	public String submit(Model model, @ModelAttribute("login") Login login) {
-
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-
-		LoginDAO loginDAO = context.getBean(LoginDAO.class);
-		List<Login> list = loginDAO.listAllUsers();
+		LoginService service = context.getBean(LoginService.class);
+		List<Login> list = service.listAllUsers();
 		if (list.contains(login.getUserName())) {
 			model.addAttribute("error", "User already exist");
 			return "login";
@@ -48,39 +43,52 @@ public class LoginController {
 
 		context.close();
 
-		return "success";
+		return "register";
 	}
-
+	
+	@SuppressWarnings("resource")
 	@RequestMapping(value = "/userlist", method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		LoginService service = context.getBean(LoginService.class);
 		List<Login> users = service.listAllUsers();
 		model.addAttribute("users", users);
-		return "allemployees";
+		return "allusers";
 	}
-
+	
+	@SuppressWarnings("resource")
 	@RequestMapping(value = { "/registeruser" }, method = RequestMethod.POST)
 	public String saveEmployee(@Validated Login login, BindingResult result, ModelMap model) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		LoginService service = context.getBean(LoginService.class);
 		if (result.hasErrors()) {
-			return "registration";
+			return "register";
 		}
 		service.create(login);
 		model.addAttribute("success", "User " + login.getUserName() + " registered successfully");
 		return "success";
 	}
 	
+	@SuppressWarnings("resource")
 	@RequestMapping(value ="/updateuser{id}", method = RequestMethod.POST)
     public String updateEmployee(@Validated Login user, BindingResult result,
             ModelMap model, @PathVariable String id) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		LoginService service = context.getBean(LoginService.class);
         if (result.hasErrors()) {
             return "registration";
         }
         service.update(id);
-        model.addAttribute("success", " user " + repository.findById(id) + " updated successfully");
+//        model.addAttribute("success", " user " + repository.findById(id) + " updated successfully");
+        model.addAttribute("success", " user  updated successfully");
         return "success";
     }
-
+	
+	@SuppressWarnings("resource")
 	@RequestMapping(value = { "/deleteuser-{id}" }, method = RequestMethod.GET)
     public String deleteUser(@PathVariable String id) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		LoginService service = context.getBean(LoginService.class);
         service.delete(id);
         return "redirect:/userlist";
     }

@@ -9,7 +9,7 @@ import com.spring.dao.BatchDAOImpl;
 import com.spring.model.Batch;
 
 
-@Service
+@Service("batchService")
 public class BatchServiceImpl implements BatchService{
 	
 	@Autowired

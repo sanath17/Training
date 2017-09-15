@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="Student")
 public class Student {
 //	CREATE TABLE `student` (
 //			  `id` int(11) NOT NULL,

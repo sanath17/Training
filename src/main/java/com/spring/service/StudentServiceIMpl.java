@@ -9,7 +9,7 @@ import com.spring.dao.StudentDAOImpl;
 import com.spring.model.Student;
 
 
-@Service
+@Service("studentService")
 public class StudentServiceIMpl implements StudentService {
 
 	@Autowired

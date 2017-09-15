@@ -2,12 +2,15 @@ package com.spring.model;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="Batch")
 public class Batch {
 	
 //	batch
@@ -24,8 +27,13 @@ public class Batch {
 //	  UNIQUE KEY `batch_id` (`batch_id`)
 //	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	
-	@OneToMany
-	private Student student;
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
+//	@OneToMany
+//	private Student student;
 	
 	private String program;
 	
@@ -38,14 +46,14 @@ public class Batch {
 	private Date created_date;
 	
 	private Date upadted_date;
-
-	public Student getStudent() {
-		return student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
-	}
+//
+//	public Student getStudent() {
+//		return student;
+//	}
+//
+//	public void setStudent(Student student) {
+//		this.student = student;
+//	}
 
 
 	public String getProgram() {
@@ -96,12 +104,6 @@ public class Batch {
 		this.upadted_date = upadted_date;
 	}
 
-	@Override
-	public String toString() {
-		return "Batch [student=" + student + ", program=" + program + ", trainer_name=" + trainer_name
-				+ ", student_count=" + student_count + ", course=" + course + ", created_date=" + created_date
-				+ ", upadted_date=" + upadted_date + "]";
-	}
 	
 	
 }

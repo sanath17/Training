@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.spring.dao.LoginDAOImpl;
 import com.spring.model.Login;
 
-@Service
+@Service("loginService")
 @EnableTransactionManagement
 public class LoginServiceImpl implements LoginService {
 	
