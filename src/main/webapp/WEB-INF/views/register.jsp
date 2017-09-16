@@ -33,6 +33,14 @@
 					<td><input type="email" name="email" /></td>
 				</tr>
 				<tr>
+					<td>Created Date</td>
+					<td><input type="Date" name="created_date" /></td>
+				</tr>
+				<tr>
+					<td>Updated Date</td>
+					<td><input type="Date" name="updated_date" /></td>
+				</tr>
+				<tr>
 					<td></td>
 					<td><input type="submit" value="Submit" /></td>
 				</tr>

@@ -5,11 +5,14 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.model.Student;
 
 
 @Repository
+@EnableTransactionManagement
 public class StudentDAOImpl implements StudentDAO {
 	
 
@@ -29,6 +32,7 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
+	@Transactional
 	public Student create(Student student) {
 		Session session = this.sessionFactory.openSession();
 		session.persist(student);
@@ -37,6 +41,7 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Student student) {
 		Session session = this.sessionFactory.openSession();
 		session.delete(student);
@@ -44,6 +49,7 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
+	@Transactional
 	public Student update(Student student) {
 		Session session = this.sessionFactory.openSession();
 		session.update(student);

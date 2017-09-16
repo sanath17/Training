@@ -2,12 +2,12 @@ package com.spring.model;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Batch")
@@ -28,12 +28,14 @@ public class Batch {
 //	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	
 	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GenericGenerator(name = "customUUID", strategy = "uuid2")
+	@GeneratedValue(generator = "customUUID")
+	private String id;
 	
 //	@OneToMany
 //	private Student student;
+	
+	private String batch_id;
 	
 	private String program;
 	
@@ -45,7 +47,7 @@ public class Batch {
 	
 	private Date created_date;
 	
-	private Date upadted_date;
+	private Date updated_date;
 //
 //	public Student getStudent() {
 //		return student;
@@ -55,6 +57,13 @@ public class Batch {
 //		this.student = student;
 //	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getProgram() {
 		return program;
@@ -96,14 +105,30 @@ public class Batch {
 		this.created_date = created_date;
 	}
 
-	public Date getUpadted_date() {
-		return upadted_date;
+	public Date getUpdated_date() {
+		return updated_date;
 	}
 
-	public void setUpadted_date(Date upadted_date) {
-		this.upadted_date = upadted_date;
+	public void setUpdated_date(Date updated_date) {
+		this.updated_date = updated_date;
 	}
 
+	@Override
+	public String toString() {
+		return "Batch [id=" + id + ", program=" + program + ", trainer_name=" + trainer_name + ", student_count="
+				+ student_count + ", course=" + course + ", created_date=" + created_date + ", updated_date="
+				+ updated_date + "]";
+	}
+
+	public String getBatch_id() {
+		return batch_id;
+	}
+
+	public void setBatch_id(String batch_id) {
+		this.batch_id = batch_id;
+	}
+
+	
 	
 	
 }

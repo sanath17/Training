@@ -2,12 +2,12 @@ package com.spring.model;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Login")
@@ -29,11 +29,13 @@ public class Login {
 
 	
 	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GenericGenerator(name = "customUUID", strategy = "uuid2")
+	@GeneratedValue(generator = "customUUID")
+	private String id;
 	
 	private String username;
+	
+	private String email;
 	
 	private String password;
 	
@@ -45,12 +47,21 @@ public class Login {
 	
 	private Date updated_date;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
+	}
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getUserName() {
@@ -111,10 +122,12 @@ public class Login {
 
 	@Override
 	public String toString() {
-		return "Login [id=" + id + ", username=" + username + ", password=" + password + ", first_name=" + first_name
-				+ ", last_name=" + last_name + ", created_date=" + created_date + ", updated_date=" + updated_date
-				+ "]";
+		return "Login [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", first_name=" + first_name + ", last_name=" + last_name + ", created_date=" + created_date
+				+ ", updated_date=" + updated_date + "]";
 	}
+
+	
 	
 	
 	

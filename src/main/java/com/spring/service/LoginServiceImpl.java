@@ -2,35 +2,46 @@ package com.spring.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.dao.LoginDAOImpl;
 import com.spring.model.Login;
 
-@Service("loginService")
+@Service
 @EnableTransactionManagement
 public class LoginServiceImpl implements LoginService {
 	
-	@Autowired
-	private LoginDAOImpl repository;
+
+	private LoginDAOImpl loginDAO;
+	
+	public LoginDAOImpl getLoginDAO() {
+		return loginDAO;
+	}
+
+	public void setLoginDAO(LoginDAOImpl loginDAO) {
+		this.loginDAO = loginDAO;
+	}
+
 	
 	
 	@Override
 	public List<Login> listAllUsers() {
 		// TODO Auto-generated method stub
-		return repository.listAllUsers();
+		return loginDAO.listAllUsers();
 	}
 
 	@Override
+	@Transactional
 	public Login create(Login login) {
-		return repository.create(login);
+		return loginDAO.create(login);
 	}
 
 	@Override
+	@Transactional
 	public Login update(String id) {
-		Login existing = repository.findById(id);
+		Login existing = loginDAO.findById(id);
 		if(existing==null){
 			System.out.println("not found");
 			//exception
@@ -40,12 +51,13 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public void delete(String id) {
-		Login existing = repository.findById(id);
+		Login existing = loginDAO.findById(id);
 		if(existing==null){
 			System.out.println("no user found to delete");
 			//exception
 		}
-		repository.delete(existing);
+		loginDAO.delete(existing);
 	}
 
+	
 }

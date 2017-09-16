@@ -5,14 +5,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
-<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:mysql://localhost:3306/training" />
+		<property name="url" value="jdbc:mysql://localhost:3306/training1" />
 		<property name="username" value="root" />
 		<property name="password" value="P@ssword1" />
 	</bean>
+
 	<!-- Hibernate 3 Annotation SessionFactory Bean definition -->
 	<bean id="hibernate3AnnotatedSessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
@@ -22,6 +22,7 @@
 				<value>com.spring.model.Batch</value>
 				<value>com.spring.model.Login</value>
 				<value>com.spring.model.Student</value>
+
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -32,15 +33,21 @@
 			</props>
 		</property>
 	</bean>
-
+	
 	<bean id="loginService" class="com.spring.service.LoginServiceImpl">
+		<property name="loginDAO" ref="loginDAO" />
+	</bean>
+
+	<bean id="loginDAO" class="com.spring.dao.LoginDAOImpl">
 		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
 	</bean>
+	
 	<bean id="batchService" class="com.spring.service.BatchServiceImpl">
+		<property name="batchDAO" ref="batchDAO" />
+	</bean>
+
+	<bean id="batchDAO" class="com.spring.dao.BatchDAOImpl">
 		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
 	</bean>
-	<bean id="studentService" class="com.spring.service.StudentServiceImpl">
-		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
-	</bean>
+	
 </beans>
-   

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +14,8 @@ import com.spring.model.Login;
 @EnableTransactionManagement
 public class LoginDAOImpl implements LoginDAO {
 	
-//	@Autowired
-	 public SessionFactory sessionFactory;
+
+	 private SessionFactory sessionFactory;
 	
 	 public void setSessionFactory(SessionFactory sessionFactory){
 	     this.sessionFactory = sessionFactory;
@@ -45,7 +44,9 @@ public class LoginDAOImpl implements LoginDAO {
 	@Transactional
 	public Login create(Login login) {
 		Session session = this.sessionFactory.openSession();
-		session.persist(login);
+		session.beginTransaction();
+		session.save(login);
+		session.getTransaction().commit();
 		session.close();
 		return login;
 	}
@@ -54,7 +55,9 @@ public class LoginDAOImpl implements LoginDAO {
 	@Transactional
 	public Login update(Login login) {
 		Session session = this.sessionFactory.openSession();
+		session.beginTransaction();
 		session.update(login);
+		session.getTransaction().commit();
 		session.close();
 		return  login;
 	}
@@ -62,7 +65,9 @@ public class LoginDAOImpl implements LoginDAO {
 	@Override
 	public void delete(Login login) {
 		Session session = this.sessionFactory.openSession();
+		session.beginTransaction();
 		session.delete(login);
+		session.getTransaction().commit();
 		session.close();
 	}
 
