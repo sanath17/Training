@@ -37,7 +37,6 @@
 	<bean id="loginService" class="com.spring.service.LoginServiceImpl">
 		<property name="loginDAO" ref="loginDAO" />
 	</bean>
-
 	<bean id="loginDAO" class="com.spring.dao.LoginDAOImpl">
 		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
 	</bean>
@@ -45,9 +44,14 @@
 	<bean id="batchService" class="com.spring.service.BatchServiceImpl">
 		<property name="batchDAO" ref="batchDAO" />
 	</bean>
-
 	<bean id="batchDAO" class="com.spring.dao.BatchDAOImpl">
 		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
 	</bean>
 	
+	<bean id="studentService" class="com.spring.service.StudentServiceImpl">
+		<property name="studentDAO" ref="studentDAO" />
+	</bean>
+	<bean id="studentDAO" class="com.spring.dao.StudentDAOImpl">
+		<property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+	</bean>
 </beans>

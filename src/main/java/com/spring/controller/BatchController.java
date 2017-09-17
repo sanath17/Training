@@ -23,12 +23,6 @@ public class BatchController {
 		return "batch";
 	}
 	
-	@RequestMapping(value = "/batchview", method = RequestMethod.GET)
-	public String batchlist(Model model) {
-		model.addAttribute("msg", "Please Enter Your Login Details");
-		return "batchview";
-	}
-	
 		@SuppressWarnings("resource")
 		@RequestMapping(value = { "/registerbatch"} , method = RequestMethod.POST)
 		public String saveUser(ModelMap model, @ModelAttribute("login") Batch batch) {
@@ -44,18 +38,26 @@ public class BatchController {
 			BatchUser.setUpdated_date(batch.getUpdated_date());
 			service.create(BatchUser);
 			model.addAttribute("success", "program " + BatchUser.getProgram() + " registered successfully");
-			return "success";	
+			List<Batch> list = 	service.findall();
+			for (Batch p : list) {
+				System.out.println("Person List::" + p);
+			}
+			model.addAttribute("msg", list); 
+			context.close();
+			return "batchview";
 		}
 		
 		@SuppressWarnings("resource")
-		@RequestMapping(value = "/listbatch", method = RequestMethod.GET) 
-	    public ModelAndView listbatches(){ 
+		@RequestMapping(value = "/batchview", method = RequestMethod.GET) 
+		public String listBatch(ModelMap model, @ModelAttribute("batch") Batch batch){
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 			BatchService service = context.getBean(BatchService.class);
-//			List<Batch> listbatch = service.findall();
-//			 for(Batch model : listbatch) {
-//		            System.out.println(model.toString());
-//		        }
-			 return new ModelAndView("listbatches","listBatch",service.findall());
+			List<Batch> list = 	service.findall();
+			for (Batch p : list) {
+				System.out.println("Person List::" + p);
+			}
+			model.addAttribute("msg", list); 
+			context.close();
+			return "batchview";
 		}
 }
