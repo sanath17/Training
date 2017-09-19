@@ -1,0 +1,44 @@
+body{
+    background-color: #9acfea;
+}
+
+table{
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 150px;
+    border:1px solid black
+}
+
+th,td{
+    border:1px solid black;
+    padding: 10px;
+}
+
+.heading{
+    color: black;
+    position: relative;
+    margin-left: 40%;
+}
+
+.container{
+    margin-left: 100px;
+    margin-top: 50px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+}
+
+input{
+    margin-left: 50px;
+    margin-top: 25px;
+    margin-right: 50px;
+    margin-bottom: 25px;
+}
+
+label{
+    margin-left: 50px;
+    margin-top: 25px;
+    margin-right: 50px;
+    margin-bottom: 25px;
+
+}
