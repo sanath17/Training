@@ -34,7 +34,7 @@ public class StudentDAOImpl implements StudentDAO {
 	public Student create(Student student) {
 		Session session = this.sessionFactory.openSession();
 		session.beginTransaction();
-		session.persist(student);
+		session.save(student);
 		session.getTransaction().commit();
 		session.close();
 		return student;

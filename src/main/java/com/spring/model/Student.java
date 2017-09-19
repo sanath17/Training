@@ -5,9 +5,10 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="Student")
@@ -25,17 +26,20 @@ public class Student {
 //			  KEY `batch_id` (`batch_id`),
 //			  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`id`)
 //			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-    @Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@Id
+	@GenericGenerator(name = "customUUID", strategy = "uuid2")
+	@GeneratedValue(generator = "customUUID")
+	private String id;
 	
-	private int batch_id;
+	private String batch_id;
+	
+	private String name;
 	
 	@Column(unique = true)
 	private String email;
 	
-	private int contact;
+	@Column(name="contact")
+	private String contact;
 	
 	private String visa_status;
 	
@@ -45,19 +49,19 @@ public class Student {
 	
 	private Date updated_date;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getBatch_id() {
+	public String getBatch_id() {
 		return batch_id;
 	}
 
-	public void setBatch_id(int batch_id) {
+	public void setBatch_id(String batch_id) {
 		this.batch_id = batch_id;
 	}
 
@@ -68,12 +72,20 @@ public class Student {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getName() {
+		return name;
+	}
 
-	public int getContact() {
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getContact() {
 		return contact;
 	}
 
-	public void setContact(int contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
 	}
 
@@ -111,12 +123,10 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", batch_id=" + batch_id + ", email=" + email + ", contact=" + contact
-				+ ", visa_status=" + visa_status + ", cost=" + cost + ", created_date=" + created_date
+		return "Student [id=" + id + ", batch_id=" + batch_id + ", name=" + name + ", email=" + email + ", contact="
+				+ contact + ", visa_status=" + visa_status + ", cost=" + cost + ", created_date=" + created_date
 				+ ", updated_date=" + updated_date + "]";
-	} 
-	
-	
+	}
 	
 }
 

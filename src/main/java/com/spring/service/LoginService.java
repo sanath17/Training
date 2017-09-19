@@ -14,5 +14,7 @@ public interface LoginService {
 	public Login update(String id);
 	
 	public void delete(String id);
+
+	public Login validateUser(Login login);
 		
 }

@@ -9,7 +9,7 @@ import com.spring.model.Student;
 
 
 @Service
-public class StudentServiceIMpl implements StudentService {
+public class StudentServiceImpl implements StudentService {
 
 	private StudentDAOImpl StudentDAO;
 	

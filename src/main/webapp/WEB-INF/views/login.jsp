@@ -5,26 +5,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Spring Login Form</title>
+<title>Login</title>
+<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-	<form:form action="/Spring-MVC-LoginForm/login" method="POST" >
+	<div class="imgcontainer">
+		<img src="images/social.png" alt="Avatar" class="avatar">
+	</div>
+	<form:form action="/Spring-MVC-LoginForm/login" method="POST">
 
-		<div align="center">
-			<table>
-				<tr>
-					<td>User Name</td>
-					<td><input type="text" name="username" /></td>
-				</tr>
-				<tr>
-					<td>Password</td>
-					<td><input type="password" name="password" /></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="Submit" /></td>
-				</tr>
-			</table>
+		<div class="container">
+
+			<h2>Sign in</h2>
+
+			<label><b>Username</b></label> 
+			<input type="text" placeholder="Enter Username" name="username" required>
+			
+			<label><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="password" required>
+
+			<button type="submit" value="Submit">Login</button>
+
 			<div style="color: red">${error}</div>
 
 		</div>

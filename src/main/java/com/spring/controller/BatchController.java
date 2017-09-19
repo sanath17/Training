@@ -9,7 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.model.Batch;
 import com.spring.service.BatchService;
@@ -23,9 +22,15 @@ public class BatchController {
 		return "batch";
 	}
 	
+	@RequestMapping(value = "/success", method = RequestMethod.GET)
+	public String loginsuccess(Model model) {
+		model.addAttribute("msg", "Please Enter Your Login Details");
+		return "batchview";
+	}
+	
 		@SuppressWarnings("resource")
 		@RequestMapping(value = { "/registerbatch"} , method = RequestMethod.POST)
-		public String saveUser(ModelMap model, @ModelAttribute("login") Batch batch) {
+		public String saveUser(ModelMap model, @ModelAttribute("batch") Batch batch) {
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 			Batch BatchUser = new Batch();
 			BatchService service = context.getBean(BatchService.class);
@@ -40,7 +45,7 @@ public class BatchController {
 			model.addAttribute("success", "program " + BatchUser.getProgram() + " registered successfully");
 			List<Batch> list = 	service.findall();
 			for (Batch p : list) {
-				System.out.println("Person List::" + p);
+				System.out.println("Batch List::" + p);
 			}
 			model.addAttribute("msg", list); 
 			context.close();
@@ -54,7 +59,7 @@ public class BatchController {
 			BatchService service = context.getBean(BatchService.class);
 			List<Batch> list = 	service.findall();
 			for (Batch p : list) {
-				System.out.println("Person List::" + p);
+				System.out.println("Batch List::" + p);
 			}
 			model.addAttribute("msg", list); 
 			context.close();

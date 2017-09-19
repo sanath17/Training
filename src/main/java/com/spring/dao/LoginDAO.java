@@ -15,5 +15,7 @@ public interface LoginDAO {
 	public Login update(Login login);
 
 	public void delete(Login login);
+	
+	public Login validateUser(Login login);
 
 }

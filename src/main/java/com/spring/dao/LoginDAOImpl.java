@@ -81,5 +81,15 @@ public class LoginDAOImpl implements LoginDAO {
 		return null;
 	}
 
-	
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Login validateUser(Login login) {
+		Session session = this.sessionFactory.openSession();
+		String username =login.getUserName();
+		String password =login.getPassword();
+		String sql=" From Login l where l.username='"+ username +"' and l.password='"+password+"'";
+		List<Login> employeeList = session.createQuery(sql).list();
+		return employeeList.size() > 0 ? employeeList.get(0) : null;
+	}
 }

@@ -24,8 +24,6 @@ public class LoginServiceImpl implements LoginService {
 		this.loginDAO = loginDAO;
 	}
 
-	
-	
 	@Override
 	public List<Login> listAllUsers() {
 		// TODO Auto-generated method stub
@@ -57,6 +55,12 @@ public class LoginServiceImpl implements LoginService {
 			//exception
 		}
 		loginDAO.delete(existing);
+	}
+
+	@Override
+	public Login validateUser(Login login) {
+		// TODO Auto-generated method stub
+		return loginDAO.validateUser(login);
 	}
 
 	

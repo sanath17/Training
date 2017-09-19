@@ -2,6 +2,9 @@ package com.spring.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,38 +34,23 @@ public class LoginController {
 		return "register";
 	}
 	
-	@SuppressWarnings("resource")
-	@RequestMapping(value = "/login{id}{pwd}", method = RequestMethod.POST)
-	public String submit(@PathVariable String id,String pwd, Model model, @ModelAttribute("login") Login login) {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		LoginService service = context.getBean(LoginService.class);
-		List<Login> list = service.listAllUsers();
-		if (list.contains(id) && list.contains(pwd)) {
-			model.addAttribute("msg", login.getUserName());
-			context.close();
-			return "success";
-		} else {
-			model.addAttribute("error", "Invalid Details");
-			context.close();
-			return "login";
-		}
-	}
-	/*
-	@RequestMapping(method = RequestMethod.POST)
-	public String submit(Model model, @ModelAttribute("loginBean") LoginBean loginBean) {
-		if (loginBean != null && loginBean.getUserName() != null & loginBean.getPassword() != null) {
-			if (loginBean.getUserName().equals("rajesh") && loginBean.getPassword().equals("rajesh123")) {
-				model.addAttribute("msg", loginBean.getUserName());
-				return "success";
-			} else {
-				model.addAttribute("error", "Invalid Details");
-				return "login";
-			}
-		} else {
-			model.addAttribute("error", "Please enter Details");
-			return "login";
-		}
-	}*/
+	@SuppressWarnings({ "resource", "null" })
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	  public String loginProcess(Model model,HttpServletRequest request, HttpServletResponse response,
+	  @ModelAttribute("login") Login login) {
+	    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+		LoginService loginDAO = context.getBean(LoginService.class);
+	    Login loginUser = loginDAO.validateUser(login);
+	    if (null != loginUser) {
+	    	 String redirectUrl = "/batchview";
+	         return "redirect:" + redirectUrl;
+	    }else{
+	    model.addAttribute("msg", loginUser.getUserName()); 
+	    String redirectUrl = "/login";
+        return "redirect:" + redirectUrl;
+	    }
+	  }
+	
 	
 	@SuppressWarnings("resource")
 	@RequestMapping(value = "/userlist", method = RequestMethod.GET)
